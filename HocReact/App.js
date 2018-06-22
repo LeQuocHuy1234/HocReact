@@ -9,50 +9,39 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);  
+    this.state = {
+      myInteger: 0
+    };
+  }
+  getCong() {
+    this.setState((previousState)=>{ // previousState chứa tham số của state
+      return {
+        myInteger: previousState.myInteger +1
+      }
+    });
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+      <View style={{flex: 1}}>
+        <Text style={ styles.center }>{ this.state.myInteger }</Text>
+        <Button title="Công" onPress = {this.getCong.bind(this)}/>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
+  center: {
     textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 30
+  }
 });
