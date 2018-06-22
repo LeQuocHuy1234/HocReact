@@ -1,47 +1,47 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, {Component} from 'react';
+import {Modal, Text, TouchableHighlight, View} from 'react-native';
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-} from 'react-native';
+export default class App extends Component {
+  state = {
+    modalVisible: false,
+  };
 
-export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);  
-    this.state = {
-      myInteger: 0
-    };
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
-  getCong() {
-    this.setState((previousState)=>{ // previousState chứa tham số của state
-      return {
-        myInteger: previousState.myInteger +1
-      }
-    });
-  }
+
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Text style={ styles.center }>{ this.state.myInteger }</Text>
-        <Button title="Công" onPress = {this.getCong.bind(this)}/>
+      <View style={{marginTop: 22}}>
+        <Modal
+          presentationStyle = "formSheet"
+          animationType="fade"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}>
+          <View style={{marginTop: 22}}>
+            <View>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight style={{ backgroundColor: 'blue' }}
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableHighlight
+          onPress={() => {
+            this.setModalVisible(true);
+          }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    textAlign: 'center',
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30
-  }
-});
