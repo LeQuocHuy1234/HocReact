@@ -9,21 +9,44 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  Button
 } from 'react-native';
 
 export default class App extends Component<Props> {
-  _onPress(event) {
-    alert(event.nativeEvent);
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      text:'',
+    };
   }
-
-  _onLongPress(event) {
-    alert('Long click');
+  
+  _onChangeText(text) {
+    this.setState({
+      text: text
+    });
+  }
+  
+  _onPress() {
+    alert('Xin chào ' + this.state.text);
   }
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <Text onLongPress = { this._onLongPress.bind(this) } onPress = {this._onPress.bind(this)} ellipsizeMode = {'tail'} numberOfLines = {1} selectable = { true }>Thà để ta phụ người khác chứ không để người khác phụ ta.Thà để ta phụ người khác chứ không để người khác phụ ta.</Text>
+      <View style={{flex: 1}}>
+        <TextInput
+          onChangeText = {this._onChangeText.bind(this)}
+          value = { this.state.text }
+          placeholder = { "Vui lòng nhập họ tên" }
+          // underlineColorAndroid = {'transparent'}
+          windowSoftInputMode = {'adjustResize'}
+        />
+        <Text style={{color: 'green', alignItems:'center'}}>{ this.state.text }</Text>
+        <Button
+        title="Đồng ý"
+        onPress = { this._onPress.bind(this) }
+        />
       </View>  
     );
   }
