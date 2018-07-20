@@ -11,42 +11,27 @@ import {
   Text,
   View,
   TextInput,
-  Button
+  Button,
+  Image
 } from 'react-native';
-
 export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      text:'',
-    };
-  }
-  
-  _onChangeText(text) {
-    this.setState({
-      text: text
-    });
-  }
-  
-  _onPress() {
-    alert('Xin chào ' + this.state.text);
-  }
+
   render() {
     return (
-      <View style={{flex: 1}}>
-        <TextInput
-          onChangeText = {this._onChangeText.bind(this)}
-          value = { this.state.text }
-          placeholder = { "Vui lòng nhập họ tên" }
-          // underlineColorAndroid = {'transparent'}
-          windowSoftInputMode = {'adjustResize'}
-        />
-        <Text style={{color: 'green', alignItems:'center'}}>{ this.state.text }</Text>
-        <Button
-        title="Đồng ý"
-        onPress = { this._onPress.bind(this) }
-        />
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 2/3}}>
+          <Image
+            style={{ flex: 1, width: null, height: null}}
+            resizeMode = {'stretch'} 
+            source = { require('./images/toc-dep-5.png') }
+            onLoadEnd={() => {
+              alert('Load xong');
+            }}
+            onError={()=>{
+              alert('Loi load hinh');
+            }}
+          />
+        </View>
       </View>  
     );
   }
