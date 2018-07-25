@@ -14,25 +14,12 @@ import {
   Button,
   Image
 } from 'react-native';
+import Login from './src/component/login/Login.js';
 export default class App extends Component<Props> {
 
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={{flex: 2/3}}>
-          <Image
-            style={{ flex: 1, width: null, height: null}}
-            resizeMode = {'stretch'} 
-            source = { require('./images/toc-dep-5.png') }
-            onLoadEnd={() => {
-              alert('Load xong');
-            }}
-            onError={()=>{
-              alert('Loi load hinh');
-            }}
-          />
-        </View>
-      </View>  
+      <Login /> 
     );
   }
 }
